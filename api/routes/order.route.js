@@ -46,17 +46,21 @@ router.post('/', (req, res, next) => {
 })
 
 router.get('/:orderID' ,(req, res, next)=>{
-    const id = req.params.orderID;
-    if(id === 'special'){
-        res.status(200).json({
-            message : "show info the single product",
-            id : id
-        });
-    }else{
-        res.status(200).json({
-            message : "Can not found",
-        });
-    }
+    const orderID = req.params.orderID;
+    Order.findById(orderID)
+        .exec()
+        .then(orderDetail =>{
+            if(orderDetail != null)
+            res.status(200).json({
+                orderDetail : orderDetail
+            })
+        })
+        .catch(err =>{
+            res.status(400).json({
+                error : err
+            })
+        })
+    
 })
 
 // router.patch('/:orderID' ,(req, res, next)=>{

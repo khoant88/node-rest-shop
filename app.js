@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const productRoutes = require('./api/routes/product.route');
 const orderRoutes = require('./api/routes/order.route');
+const userRoutes = require('./api/routes/user.route');
 //connect mongoose 
 mongoose.connect('mongodb+srv://admin:admin@cluster0-igxuv.mongodb.net/test?retryWrites=true',
         {
@@ -31,6 +32,7 @@ app.use('/uploads', express.static('uploads'))
 //handing request
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
+app.use('/users', userRoutes);
 
 app.use((req, res, next)=>{
     const err = new Error('Not Found');
